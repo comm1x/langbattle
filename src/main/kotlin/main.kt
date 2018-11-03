@@ -17,7 +17,7 @@ import java.security.MessageDigest
 import java.util.*
 
 fun main(args: Array<String>) {
-    val server = embeddedServer(Netty, port = 8080) {
+    val server = embeddedServer(Netty, port = 80) {
         install(ContentNegotiation) {
             jackson {
                 propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
