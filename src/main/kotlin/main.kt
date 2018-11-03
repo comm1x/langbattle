@@ -14,6 +14,7 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun main(args: Array<String>) {
@@ -21,6 +22,7 @@ fun main(args: Array<String>) {
         install(ContentNegotiation) {
             jackson {
                 propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+                dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             }
         }
 
@@ -48,14 +50,14 @@ data class Response(
     val id: String,
     val firstName: String,
     val lastName: String,
-    val currentTime: Long,
+    val currentTime: Date,
     val say: String
 ) {
     constructor(request: Request): this(
         id = request.id,
         firstName = "${request.firstName} ${request.firstName.md5()}",
         lastName = "${request.lastName} ${request.lastName.md5()}",
-        currentTime = Date().time,
+        currentTime = Date(),
         say = "Kotlin is the best!"
     )
 }
